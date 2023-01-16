@@ -56,3 +56,39 @@
   .lightText {
     color: #666;
   }
+
+  .navbarSpacer {
+    margin-top: 6rem;
+  }
+
+  .myTable {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid rgba(228, 228, 228, 0.659);
+    border-radius: 6px;
+    padding: 2rem;
+  }
+
+  .myTableRow {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .myTableHeader {
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .myTableHeader:first-child {
+    text-align: left;
+  }
+
+  .myTableCell {
+    min-width: 8rem;
+    text-align: center;
+  }
+
+  .myTableCell:first-child {
+    text-align: left;
+  }

@@ -15,6 +15,18 @@ export async function getServerSideProps(context) {
   };
 }
 
+function calculateOverall(skater) {
+  return Math.round(
+    (skater.offense +
+      skater.defense +
+      skater.skating +
+      skater.passing +
+      skater.shot +
+      skater.stick) /
+      6
+  );
+}
+
 export default function Home({ allSkaters }) {
   return (
     <>
@@ -24,19 +36,70 @@ export default function Home({ allSkaters }) {
 
       <div className={utilStyles.container}>
         <Toolbar></Toolbar>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        {allSkaters.data.map(
-          ({ name, offense, defense, skating, passing, shot, stick }) => (
-            <div key={name}>
-              {name}: offense({offense}) defense({defense}) skating(
-              {skating}) passing({passing}) shot({shot}) stick({stick})
+        <div className={utilStyles.navbarSpacer}></div>
+        <div className={utilStyles.myTable}>
+          <div className={utilStyles.myTableRow}>
+            <div
+              className={`${utilStyles.myTableCell} ${utilStyles.myTableHeader}`}
+            >
+              Name
             </div>
-          )
-        )}
+            <div
+              className={`${utilStyles.myTableCell} ${utilStyles.myTableHeader}`}
+            >
+              Overall
+            </div>
+            <div
+              className={`${utilStyles.myTableCell} ${utilStyles.myTableHeader}`}
+            >
+              Offense
+            </div>
+            <div
+              className={`${utilStyles.myTableCell} ${utilStyles.myTableHeader}`}
+            >
+              Defense
+            </div>
+            <div
+              className={`${utilStyles.myTableCell} ${utilStyles.myTableHeader}`}
+            >
+              Skating
+            </div>
+            <div
+              className={`${utilStyles.myTableCell} ${utilStyles.myTableHeader}`}
+            >
+              Passing
+            </div>
+            <div
+              className={`${utilStyles.myTableCell} ${utilStyles.myTableHeader}`}
+            >
+              Shot
+            </div>
+            <div
+              className={`${utilStyles.myTableCell} ${utilStyles.myTableHeader}`}
+            >
+              Stick
+            </div>
+          </div>
+          {allSkaters.response.map(
+            (
+              { name, offense, defense, skating, passing, shot, stick },
+              index
+            ) => (
+              <div className={utilStyles.myTableRow} key={name}>
+                <div className={utilStyles.myTableCell}>{name}</div>
+                <div className={utilStyles.myTableCell}>
+                  {calculateOverall(allSkaters.response[index])}
+                </div>
+                <div className={utilStyles.myTableCell}>{offense}</div>
+                <div className={utilStyles.myTableCell}>{defense}</div>
+                <div className={utilStyles.myTableCell}>{skating}</div>
+                <div className={utilStyles.myTableCell}>{passing}</div>
+                <div className={utilStyles.myTableCell}>{shot}</div>
+                <div className={utilStyles.myTableCell}>{stick}</div>
+              </div>
+            )
+          )}
+        </div>
       </div>
     </>
   );
