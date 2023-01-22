@@ -1,5 +1,5 @@
 import dbConnect from "../../lib/dbConnect";
-import Skater from "../../models/Skater";
+import Player from "../../models/Player";
 
 export default async function handler(req, res) {
   await dbConnect();
@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     case "GET":
       try {
         const { id } = req.query;
-        Skater.findById(Object(id)).then((response) => {
+        Player.findById(id).then((response) => {
           res.status(200).json({
             message: "Get Success",
             response: response,
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
       const passing = req.body.passing;
       const shot = req.body.shot;
       const stick = req.body.stick;
-      const newSkater = new Skater({
+      const newPlayer = new Player({
         name: name,
         offense: offense,
         defense: defense,
@@ -34,7 +34,7 @@ export default async function handler(req, res) {
         shot: shot,
         stick: stick,
       });
-      newSkater
+      newPlayer
         .save()
         .then((response) => {
           res.status(200).json({
@@ -44,14 +44,48 @@ export default async function handler(req, res) {
         })
         .catch((response) => {
           res.status(500).json({
-            message: "Error creating skater",
+            message: "Error creating player",
             response: response,
           });
         });
       break;
+    case "PUT":
+      try {
+        const { id } = req.query;
+        const name = req.body.name;
+        const offense = req.body.offense;
+        const defense = req.body.defense;
+        const skating = req.body.skating;
+        const passing = req.body.passing;
+        const shot = req.body.shot;
+        const stick = req.body.stick;
+        Player.findById(id)
+          .then((player) => {
+            player.name = name;
+            player.offense = offense;
+            player.defense = defense;
+            player.skating = skating;
+            player.passing = passing;
+            player.shot = shot;
+            player.stick = stick;
+            player.save().then((response) => {
+              res.status(200).json({
+                message: "Put Success",
+                response: response,
+              });
+            });
+          })
+          .catch((response) => {
+            res.status(500).json({
+              message: "Error updating player",
+              response: response,
+            });
+          });
+        break;
+      } catch (error) {}
     case "DELETE":
       const { id } = req.query;
-      Skater.findByIdAndDelete(id)
+      Player.findByIdAndDelete(id)
         .then((response) => {
           res.status(200).json({
             message: "Delete Success",
@@ -60,7 +94,7 @@ export default async function handler(req, res) {
         })
         .catch((response) => {
           res.status(500).json({
-            message: "Error deleting skater",
+            message: "Error deleting player",
             response: response,
           });
         });

@@ -84,6 +84,11 @@
     text-align: left;
   }
 
+  .myTableDataRow:hover {
+    cursor: pointer;
+    background-color: rgba(237, 237, 237, 0.753);
+  }
+
   .myTableCell {
     min-width: 8rem;
     text-align: center;
