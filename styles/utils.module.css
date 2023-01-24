@@ -77,16 +77,31 @@
 
   .myTableHeader {
     font-weight: bold;
+    font-size: large;
     margin-bottom: 1rem;
+    cursor: pointer;
+  }
+
+  .myTableHeader:hover {
+    color: rgba(169, 169, 169, 0.536);
   }
 
   .myTableHeader:first-child {
     text-align: left;
   }
 
+  .myTableDataRow {
+    padding: .5rem 0;
+    border-bottom: 1px solid rgba(227, 227, 227, 0.37);
+  }
+
   .myTableDataRow:hover {
     cursor: pointer;
     background-color: rgba(237, 237, 237, 0.753);
+  }
+
+  .myTableDataRow:last-of-type {
+    border: none;
   }
 
   .myTableCell {
@@ -96,4 +111,8 @@
 
   .myTableCell:first-child {
     text-align: left;
+  }
+
+  .fontAwesomeIcon {
+    margin-right: .5rem;
   }
