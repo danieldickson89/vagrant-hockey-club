@@ -1,7 +1,6 @@
 import calculateOverall from "./calculateOverall";
 
-export default function sortData(objectArray, propertyName, sortAsc) {
-  console.log("BEFORE: ", objectArray[0]);
+export default function sortData(objectArray, propertyName, sortType, sortAsc) {
   if (propertyName === "overall") {
     if (sortAsc) {
       objectArray.sort(function (a, b) {
@@ -19,6 +18,28 @@ export default function sortData(objectArray, propertyName, sortAsc) {
           return -1;
         }
         if (calculateOverall(a) < calculateOverall(b)) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+  } else if (sortType === "abc") {
+    if (sortAsc) {
+      objectArray.sort(function (a, b) {
+        if (a[propertyName].toLowerCase() < b[propertyName].toLowerCase()) {
+          return -1;
+        }
+        if (a[propertyName].toLowerCase() > b[propertyName].toLowerCase()) {
+          return 1;
+        }
+        return 0;
+      });
+    } else {
+      objectArray.sort(function (a, b) {
+        if (a[propertyName].toLowerCase() > b[propertyName].toLowerCase()) {
+          return -1;
+        }
+        if (a[propertyName].toLowerCase() < b[propertyName].toLowerCase()) {
           return 1;
         }
         return 0;
@@ -47,5 +68,4 @@ export default function sortData(objectArray, propertyName, sortAsc) {
       });
     }
   }
-  console.log("AFTER: ", objectArray[0]);
 }

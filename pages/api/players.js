@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     case "GET":
       Player.find().then((response) => {
         // when getting the list of players we'll sort it alphabetically by default
-        sortData(response, "name", true);
+        sortData(response, "name", "abc", true);
         res.status(200).json({
           message: "Get Success",
           response: response,
