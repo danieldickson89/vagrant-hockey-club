@@ -4,11 +4,12 @@ import calculateOverall from "../../services/calculateOverall";
 import RosterHeaders from "./rosterHeaders";
 import { useState } from "react";
 
-export default function RosterTable({ players }) {
-  const [playersData, setPlayersData] = useState(players.response);
+export default function RosterTable({ players, pushPlayers }) {
+  // const [playersData, setPlayersData] = useState(players);
 
   const pullSortedPlayers = (playersSorted) => {
-    setPlayersData(playersSorted);
+    // setPlayersData(playersSorted);
+    pushPlayers(playersSorted);
   };
 
   return (
@@ -19,7 +20,7 @@ export default function RosterTable({ players }) {
           players={players}
         ></RosterHeaders>
 
-        {playersData.map(
+        {players.map(
           (
             { _id, name, offense, defense, skating, passing, shot, stick },
             index
@@ -31,7 +32,7 @@ export default function RosterTable({ players }) {
             >
               <div className={utilStyles.myTableCell}>{name}</div>
               <div className={utilStyles.myTableCell}>
-                {calculateOverall(playersData[index])}
+                {calculateOverall(players[index])}
               </div>
               <div className={utilStyles.myTableCell}>{offense}</div>
               <div className={utilStyles.myTableCell}>{defense}</div>

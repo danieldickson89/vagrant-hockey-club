@@ -18,7 +18,7 @@ export default function RosterHeaders({ players, pushSortedPlayers }) {
   const [tableHeaders, setTableHeaders] = useState(initialTableHeaders);
 
   function sortPlayers(header) {
-    const updatedPlayersData = [...players.response];
+    const updatedPlayersData = [...players];
     sortData(updatedPlayersData, header.title.toLowerCase(), header.type, header.sortAsc);
     pushSortedPlayers(updatedPlayersData);
   }
