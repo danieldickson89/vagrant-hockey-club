@@ -116,3 +116,79 @@
   .fontAwesomeIcon {
     margin-right: .5rem;
   }
+
+  .myForm {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding: 2rem;
+  }
+
+  .myFormRow {
+    display: flex;
+    flex-direction: row;
+    margin-top: .5rem;
+  }
+
+  .myFormRowCentered {
+    justify-content: center;
+  }
+
+  .myLabel {
+    font-size: large;
+    margin-top: .5rem;
+    width: 8rem;
+  }
+
+  .myInput {
+    border: 1.5px solid rgba(228, 228, 228, 0.659);
+    border-radius: 6px;
+    font-size: large;
+    padding: .5rem;
+  }
+
+  .myTextInput {
+    width: 12rem;
+  }
+
+  .myNumberInput {
+    width: 5rem;
+  }
+
+  .myFormButtons {
+    justify-content: center;
+  }
+
+  .myFormButton {
+    border: 1.5px solid rgb(255, 255, 255);
+    border-radius: 6px;
+    font-size: large;
+    font-weight: 200;
+    cursor: pointer;
+    margin: 1rem .25rem;
+  }
+
+  .myFormButtonCancel {
+    background-color: rgba(234, 234, 234, 0.877);
+  }
+
+  .myFormButtonCancel:hover {
+    background-color: rgba(234, 234, 234, 0.555);
+  }
+
+  .myFormButtonSave {
+    background-color: rgb(115, 210, 115);
+  }
+
+  .myFormButtonSave:hover {
+    background-color: rgba(115, 210, 115, 0.555);
+  }
+
+  .myFormButtonNew {
+    color: white;
+    background-color: rgb(64, 116, 246);
+  }
+
+  .myFormButtonNew:hover {
+    background-color: rgba(64, 116, 246, 0.555);
+  }

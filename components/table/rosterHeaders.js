@@ -1,21 +1,9 @@
-import { useState } from "react";
 import sortData from "../../services/sortData";
 import utilStyles from "../../styles/utils.module.css";
 import SortIcon from "./sortIcon";
 
-let initialTableHeaders = [
-  { title: "Name", type: "abc", sortActive: true, sortAsc: true },
-  { title: "Overall", type: "123", sortActive: false, sortAsc: true },
-  { title: "Offense", type: "123", sortActive: false, sortAsc: true },
-  { title: "Defense", type: "123", sortActive: false, sortAsc: true },
-  { title: "Skating", type: "123", sortActive: false, sortAsc: true },
-  { title: "Passing", type: "123", sortActive: false, sortAsc: true },
-  { title: "Shot", type: "123", sortActive: false, sortAsc: true },
-  { title: "Stick", type: "123", sortActive: false, sortAsc: true },
-];
-
-export default function RosterHeaders({ players, pushSortedPlayers }) {
-  const [tableHeaders, setTableHeaders] = useState(initialTableHeaders);
+export default function RosterHeaders({ tableHeaders, pushTableHeaders, players, pushSortedPlayers }) {
+//   const [tableHeaders, setTableHeaders] = useState(initialTableHeaders);
 
   function sortPlayers(header) {
     const updatedPlayersData = [...players];
@@ -36,7 +24,7 @@ export default function RosterHeaders({ players, pushSortedPlayers }) {
         return header;
       }
     });
-    setTableHeaders(updatedTableHeaders);
+    pushTableHeaders(updatedTableHeaders);
   }
 
   return (

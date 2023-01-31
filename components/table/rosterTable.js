@@ -2,14 +2,19 @@ import utilStyles from "../../styles/utils.module.css";
 import Link from "next/link";
 import calculateOverall from "../../services/calculateOverall";
 import RosterHeaders from "./rosterHeaders";
-import { useState } from "react";
 
-export default function RosterTable({ players, pushPlayers }) {
-  // const [playersData, setPlayersData] = useState(players);
-
+export default function RosterTable({
+  tableHeaders,
+  pushTableHeaders,
+  players,
+  pushPlayers,
+}) {
   const pullSortedPlayers = (playersSorted) => {
-    // setPlayersData(playersSorted);
     pushPlayers(playersSorted);
+  };
+
+  const pullTableHeaders = (updatedTableHeaders) => {
+    pushTableHeaders(updatedTableHeaders);
   };
 
   return (
@@ -18,6 +23,8 @@ export default function RosterTable({ players, pushPlayers }) {
         <RosterHeaders
           pushSortedPlayers={pullSortedPlayers}
           players={players}
+          pushTableHeaders={pullTableHeaders}
+          tableHeaders={tableHeaders}
         ></RosterHeaders>
 
         {players.map(
