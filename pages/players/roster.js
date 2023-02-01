@@ -3,6 +3,7 @@ import utilStyles from "../../styles/utils.module.css";
 import Toolbar from "../../components/toolbar/toolbar";
 import RosterTable from "../../components/table/rosterTable";
 import { useState } from "react";
+import Link from "next/link";
 
 export async function getServerSideProps() {
   // Trying to find a way to have the GET call use whatever current header is active
@@ -35,6 +36,7 @@ export async function getServerSideProps() {
 }
 
 let initialTableHeaders = [
+  { title: "Attending", type: "123", sortActive: false, sortAsc: true },
   { title: "Name", type: "abc", sortActive: true, sortAsc: true },
   { title: "Overall", type: "123", sortActive: false, sortAsc: true },
   { title: "Offense", type: "123", sortActive: false, sortAsc: true },
@@ -69,7 +71,7 @@ export default function Roster({ players }) {
         <button
           className={`${utilStyles.myFormButton} ${utilStyles.myFormButtonNew}`}
         >
-          + Add Player
+          <Link href="/players/newPlayer">+ Add Player</Link>
         </button>
         <RosterTable
           players={currentPlayers}

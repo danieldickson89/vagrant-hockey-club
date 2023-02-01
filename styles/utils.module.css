@@ -86,7 +86,7 @@
     color: rgba(169, 169, 169, 0.536);
   }
 
-  .myTableHeader:first-child {
+  .myTableHeader:first-child, .myTableHeader:nth-child(2) {
     text-align: left;
   }
 
@@ -105,12 +105,14 @@
   }
 
   .myTableCell {
+    display: flex;
     min-width: 8rem;
-    text-align: center;
+    justify-content: center;
+    align-items: center;
   }
 
-  .myTableCell:first-child {
-    text-align: left;
+  .myTableCell:first-child, .myTableCell:nth-child(2) {
+    justify-content: start;
   }
 
   .fontAwesomeIcon {
@@ -168,6 +170,16 @@
     margin: 1rem .25rem;
   }
 
+  .attendingButton {
+    width: 4rem;
+    border: 1.5px solid rgb(255, 255, 255);
+    border-radius: 6px;
+    font-size: large;
+    font-weight: 200;
+    cursor: pointer;
+    margin-left: .25rem;
+  }
+
   .myFormButtonCancel {
     background-color: rgba(234, 234, 234, 0.877);
   }
@@ -177,6 +189,7 @@
   }
 
   .myFormButtonSave {
+    color: white;
     background-color: rgb(115, 210, 115);
   }
 
@@ -192,3 +205,13 @@
   .myFormButtonNew:hover {
     background-color: rgba(64, 116, 246, 0.555);
   }
+
+  .myFormButtonRed {
+    color: white;
+    background-color: rgb(242, 80, 80);
+  }
+
+  .myFormButtonRed:hover {
+    background-color: rgba(242, 80, 80, 0.555);
+  }
+

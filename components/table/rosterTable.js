@@ -17,6 +17,25 @@ export default function RosterTable({
     pushTableHeaders(updatedTableHeaders);
   };
 
+  function isAttending(attending) {
+    if (attending) {
+      return (
+        <button
+          className={`${utilStyles.attendingButton} ${utilStyles.myFormButtonSave}`}
+        >
+          Yes
+        </button>
+      );
+    }
+    return (
+      <button
+        className={`${utilStyles.attendingButton} ${utilStyles.myFormButtonRed}`}
+      >
+        No
+      </button>
+    );
+  }
+
   return (
     <>
       <div className={utilStyles.myTable}>
@@ -29,7 +48,17 @@ export default function RosterTable({
 
         {players.map(
           (
-            { _id, name, offense, defense, skating, passing, shot, stick },
+            {
+              _id,
+              name,
+              offense,
+              defense,
+              skating,
+              passing,
+              shot,
+              stick,
+              attending,
+            },
             index
           ) => (
             <Link
@@ -37,6 +66,9 @@ export default function RosterTable({
               className={`${utilStyles.myTableRow} ${utilStyles.myTableDataRow}`}
               key={name}
             >
+              <div className={utilStyles.myTableCell}>
+                {isAttending(attending)}
+              </div>
               <div className={utilStyles.myTableCell}>{name}</div>
               <div className={utilStyles.myTableCell}>
                 {calculateOverall(players[index])}

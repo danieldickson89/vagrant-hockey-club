@@ -29,6 +29,10 @@ const PlayerSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  attending: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 module.exports =
