@@ -2,7 +2,7 @@ import styles from "./toolbar.module.css";
 import utilStyles from "../../styles/utils.module.css";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClipboardUser, faHome } from "@fortawesome/free-solid-svg-icons";
+import { faClipboardUser, faHome, faPeopleArrows } from "@fortawesome/free-solid-svg-icons";
 
 export default function Toolbar() {
   return (
@@ -17,6 +17,10 @@ export default function Toolbar() {
       <Link href={`/`} className={styles.navbarItem}>
         <FontAwesomeIcon className={utilStyles.fontAwesomeIcon} icon={faHome} />
         Home
+      </Link>
+      <Link href={`/teams/setTeams`} className={styles.navbarItem}>
+        <FontAwesomeIcon className={utilStyles.fontAwesomeIcon} icon={faPeopleArrows} />
+        Pick Teams
       </Link>
     </div>
   );
