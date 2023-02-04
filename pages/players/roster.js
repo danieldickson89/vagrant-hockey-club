@@ -19,9 +19,9 @@ export async function getServerSideProps() {
       sortAsc = initialTableHeaders[i].sortAsc;
     }
   }
-
+  const apiBaseUrl = process.env.API_BASE_URL
   let res = await fetch(
-    `${process.env.API_BASE_URL}players?sortBy=${sortBy}&sortType=${sortType}&sortAsc=${sortAsc}`,
+    `${apiBaseUrl}players?sortBy=${sortBy}&sortType=${sortType}&sortAsc=${sortAsc}`,
     {
       method: "GET",
       headers: {
@@ -31,23 +31,91 @@ export async function getServerSideProps() {
   );
   let players = await res.json();
   return {
-    props: { players },
+    props: { players, apiBaseUrl },
   };
 }
 
 let initialTableHeaders = [
-  { title: "Attending", type: "123", sortActive: false, sortAsc: true },
-  { title: "Name", type: "abc", sortActive: true, sortAsc: true },
-  { title: "Overall", type: "123", sortActive: false, sortAsc: true },
-  { title: "Offense", type: "123", sortActive: false, sortAsc: true },
-  { title: "Defense", type: "123", sortActive: false, sortAsc: true },
-  { title: "Skating", type: "123", sortActive: false, sortAsc: true },
-  { title: "Passing", type: "123", sortActive: false, sortAsc: true },
-  { title: "Shot", type: "123", sortActive: false, sortAsc: true },
-  { title: "Stick", type: "123", sortActive: false, sortAsc: true },
+  {
+    title: "Attending",
+    type: "123",
+    sortable: true,
+    sortActive: false,
+    sortAsc: true,
+  },
+  {
+    title: "Name",
+    type: "abc",
+    sortable: true,
+    sortActive: true,
+    sortAsc: true,
+  },
+  {
+    title: "Overall",
+    type: "123",
+    sortable: true,
+    sortActive: false,
+    sortAsc: true,
+  },
+  {
+    title: "Offense",
+    type: "123",
+    sortable: true,
+    sortActive: false,
+    sortAsc: true,
+  },
+  {
+    title: "Defense",
+    type: "123",
+    sortable: true,
+    sortActive: false,
+    sortAsc: true,
+  },
+  {
+    title: "Skating",
+    type: "123",
+    sortable: true,
+    sortActive: false,
+    sortAsc: true,
+  },
+  {
+    title: "Passing",
+    type: "123",
+    sortable: true,
+    sortActive: false,
+    sortAsc: true,
+  },
+  {
+    title: "Shot",
+    type: "123",
+    sortable: true,
+    sortActive: false,
+    sortAsc: true,
+  },
+  {
+    title: "Stick",
+    type: "123",
+    sortable: true,
+    sortActive: false,
+    sortAsc: true,
+  },
+  {
+    title: "Edit",
+    type: null,
+    sortable: false,
+    sortActive: false,
+    sortAsc: false,
+  },
+  {
+    title: "Delete",
+    type: null,
+    sortable: false,
+    sortActive: false,
+    sortAsc: false,
+  },
 ];
 
-export default function Roster({ players }) {
+export default function Roster({ players, apiBaseUrl }) {
   const [currentPlayers, setPlayers] = useState(players.response);
   const [tableHeaders, setTableHeaders] = useState(initialTableHeaders);
 
@@ -77,7 +145,8 @@ export default function Roster({ players }) {
           players={currentPlayers}
           pushPlayers={pullPlayers}
           tableHeaders={tableHeaders}
-          pushTableHeaders={pullTableHeaders}
+          pushTableHeaders={pullTableHeaders} 
+          apiBaseUrl={apiBaseUrl}
         ></RosterTable>
       </div>
     </>

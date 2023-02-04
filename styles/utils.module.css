@@ -86,6 +86,11 @@
     color: rgba(169, 169, 169, 0.536);
   }
 
+  .myTableHeader:hover:nth-child(10), .myTableHeader:hover:nth-child(11)  {
+    color: black;
+    cursor:auto;
+  }
+
   .myTableHeader:first-child, .myTableHeader:nth-child(2) {
     text-align: left;
   }
@@ -95,20 +100,29 @@
     border-bottom: 1px solid rgba(227, 227, 227, 0.37);
   }
 
-  .myTableDataRow:hover {
-    cursor: pointer;
-    background-color: rgba(237, 237, 237, 0.753);
-  }
-
   .myTableDataRow:last-of-type {
     border: none;
   }
-
-  .myTableCell {
+  
+  .myTableCellSm {
     display: flex;
-    min-width: 8rem;
     justify-content: center;
     align-items: center;
+    width: 6rem;
+  }
+
+  .myTableCellMd {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 8rem;
+  }
+
+  .myTableCellLg {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 10rem;
   }
 
   .myTableCell:first-child, .myTableCell:nth-child(2) {
@@ -117,6 +131,28 @@
 
   .fontAwesomeIcon {
     margin-right: .5rem;
+  }
+
+  .fontAwesomeIconEdit {
+    cursor: pointer;
+    font-size: x-large;
+    color:rgb(64, 116, 246);
+    display: flex;
+    text-align: center;
+  }
+
+  .fontAwesomeIconEdit:hover {
+    color:rgba(64, 116, 246, 0.555);
+  }
+
+  .fontAwesomeIconDelete {
+    cursor: pointer;
+    font-size: x-large;
+    color:rgb(242, 80, 80);
+  }
+
+  .fontAwesomeIconDelete:hover {
+    color:rgba(242, 80, 80, 0.555);
   }
 
   .myForm {

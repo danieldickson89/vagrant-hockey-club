@@ -24,6 +24,7 @@ export default function PlayerDetails({ player, isNew, apiBaseUrl }) {
       passing: currPassing,
       shot: currShot,
       stick: currStick,
+      attending: isNew ? true : player.attending,
     };
     const reqUrl = isNew
       ? `${apiBaseUrl}player`

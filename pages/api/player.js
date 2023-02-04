@@ -25,6 +25,7 @@ export default async function handler(req, res) {
       const passing = req.body.passing;
       const shot = req.body.shot;
       const stick = req.body.stick;
+      const attending = req.body.attending;
       const newPlayer = new Player({
         name: name,
         offense: offense,
@@ -33,6 +34,7 @@ export default async function handler(req, res) {
         passing: passing,
         shot: shot,
         stick: stick,
+        attending: attending,
       });
       newPlayer
         .save()
@@ -59,6 +61,7 @@ export default async function handler(req, res) {
         const passing = req.body.passing;
         const shot = req.body.shot;
         const stick = req.body.stick;
+        const attending = req.body.attending;
         Player.findById(id)
           .then((player) => {
             player.name = name;
@@ -68,6 +71,7 @@ export default async function handler(req, res) {
             player.passing = passing;
             player.shot = shot;
             player.stick = stick;
+            player.attending = attending;
             player.save().then((response) => {
               res.status(200).json({
                 message: "Put Success",
