@@ -39,6 +39,17 @@ export default function PlayerDetails({ player, isNew, apiBaseUrl }) {
     router.push("/players/roster");
   }
 
+  async function deletePlayer() {
+    const reqUrl = `${apiBaseUrl}player?id=${player._id}`;
+    await fetch(reqUrl, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    router.push("/players/roster");
+  }
+
   return (
     <div className={utilStyles.container}>
       <Toolbar></Toolbar>
@@ -133,6 +144,17 @@ export default function PlayerDetails({ player, isNew, apiBaseUrl }) {
           >
             <Link href={`/players/roster`}>Cancel</Link>
           </button>
+          {!isNew ? (
+            <button
+              className={`${utilStyles.myFormButton} ${utilStyles.myFormButtonRed}`}
+              onClick={deletePlayer}
+            >
+              Delete
+            </button>
+          ) : (
+            <></>
+          )}
+
           <button
             className={`${utilStyles.myFormButton} ${utilStyles.myFormButtonSave}`}
             onClick={savePlayer}

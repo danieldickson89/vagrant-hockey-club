@@ -99,20 +99,6 @@ let initialTableHeaders = [
     sortActive: false,
     sortAsc: true,
   },
-  {
-    title: "Edit",
-    type: null,
-    sortable: false,
-    sortActive: false,
-    sortAsc: false,
-  },
-  {
-    title: "Delete",
-    type: null,
-    sortable: false,
-    sortActive: false,
-    sortAsc: false,
-  },
 ];
 
 export default function Roster({ players, apiBaseUrl }) {

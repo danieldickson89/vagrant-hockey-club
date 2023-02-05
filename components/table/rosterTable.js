@@ -111,7 +111,9 @@ export default function RosterTable({
               >
                 {isAttending(attending)}
               </div>
-              <div className={utilStyles.myTableCellLg}>{name}</div>
+              <div className={utilStyles.myTableCellLg}>
+                <Link href={`/players/${_id}`} className={utilStyles.playerName}>{name}</Link>
+              </div>
               <div className={utilStyles.myTableCellSm}>
                 {calculateOverall(players[index])}
               </div>
@@ -121,20 +123,6 @@ export default function RosterTable({
               <div className={`${utilStyles.myTableCellSm}`}>{passing}</div>
               <div className={`${utilStyles.myTableCellSm}`}>{shot}</div>
               <div className={`${utilStyles.myTableCellSm}`}>{stick}</div>
-              <div className={`${utilStyles.myTableCellSm}`}>
-                <Link href={`/players/${_id}`}>
-                  <FontAwesomeIcon
-                    className={`${utilStyles.fontAwesomeIcon} ${utilStyles.fontAwesomeIconEdit}`}
-                    icon={faPenToSquare}
-                  />
-                </Link>
-              </div>
-              <div className={`${utilStyles.myTableCellSm}`}>
-                <FontAwesomeIcon
-                  className={`${utilStyles.fontAwesomeIcon} ${utilStyles.fontAwesomeIconDelete}`}
-                  icon={faTrashCan}
-                />
-              </div>
             </div>
           )
         )}

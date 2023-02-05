@@ -266,3 +266,9 @@
     width: 33%;
     min-width: 25rem;
   }
+
+  .playerName:hover {
+    color:rgb(80, 115, 255);
+    font-size: larger;
+    font-weight: 500;
+  }
