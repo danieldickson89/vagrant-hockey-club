@@ -251,3 +251,18 @@
     background-color: rgba(242, 80, 80, 0.555);
   }
 
+  .myColumn {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .myRow {
+    display: flex;
+    flex-direction: row;
+    margin-top: .5rem;
+  }
+
+  .oneThirdColumn {
+    width: 33%;
+    min-width: 25rem;
+  }
