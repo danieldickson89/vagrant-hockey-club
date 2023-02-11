@@ -272,3 +272,12 @@
     font-size: larger;
     font-weight: 500;
   }
+
+  .testItem {
+    cursor: move;
+    width: 200px;
+    background-color: lightblue;
+    margin: .5rem;
+    text-align: left;
+    font-size: 30px;
+  }

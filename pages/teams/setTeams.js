@@ -47,6 +47,10 @@ export default function SetTeams({ players, apiBaseUrl }) {
         if (Object.keys(teamOne).length === 1) {
           const newTeamAvgs = [0, 0, 0, 0, 0, 0];
           setTeamOneAvgs(newTeamAvgs);
+        } else {
+          const teamFiltered = teamOne.filter((a) => a._id !== player._id);
+          const newTeamAvgs = findAverages(teamFiltered);
+          setTeamOneAvgs(newTeamAvgs);
         }
         setTeamOne(teamOne.filter((a) => a._id !== player._id));
         break;
@@ -54,6 +58,10 @@ export default function SetTeams({ players, apiBaseUrl }) {
         setNoTeamPlayers([...noTeamPlayers, player]);
         if (Object.keys(teamTwo).length === 1) {
           const newTeamAvgs = [0, 0, 0, 0, 0, 0];
+          setTeamTwoAvgs(newTeamAvgs);
+        } else {
+          const teamFiltered = teamTwo.filter((a) => a._id !== player._id);
+          const newTeamAvgs = findAverages(teamFiltered);
           setTeamTwoAvgs(newTeamAvgs);
         }
         setTeamTwo(teamTwo.filter((a) => a._id !== player._id));
@@ -63,7 +71,13 @@ export default function SetTeams({ players, apiBaseUrl }) {
         if (Object.keys(teamOne).length === 1) {
           const newTeamAvgs = [0, 0, 0, 0, 0, 0];
           setTeamOneAvgs(newTeamAvgs);
+        } else {
+          const teamFiltered = teamOne.filter((a) => a._id !== player._id);
+          const newTeamOneAvgs = findAverages(teamFiltered);
+          setTeamOneAvgs(newTeamOneAvgs);
         }
+        const newSwitchTwoAvgs = findAverages([...teamTwo, player]);
+        setTeamTwoAvgs(newSwitchTwoAvgs);
         setTeamOne(teamOne.filter((a) => a._id !== player._id));
         break;
       case "switchToOne":
@@ -72,7 +86,13 @@ export default function SetTeams({ players, apiBaseUrl }) {
         if (Object.keys(teamTwo).length === 1) {
           const newTeamAvgs = [0, 0, 0, 0, 0, 0];
           setTeamTwoAvgs(newTeamAvgs);
+        } else {
+          const teamFiltered = teamTwo.filter((a) => a._id !== player._id);
+          const newTeamTwoAvgs = findAverages(teamFiltered);
+          setTeamTwoAvgs(newTeamTwoAvgs);
         }
+        const newSwitchOneAvgs = findAverages([...teamOne, player]);
+        setTeamOneAvgs(newSwitchOneAvgs);
         break;
     }
   }
@@ -107,51 +127,41 @@ export default function SetTeams({ players, apiBaseUrl }) {
   }
 
   function findNextPlayer(team, averages) {
-    const teamAvgs = findAverages(team);
-    const avgDiffs = [
-      Math.abs(teamAvgs[0] - averages[0]),
-      Math.abs(teamAvgs[1] - averages[1]),
-      Math.abs(teamAvgs[2] - averages[2]),
-      Math.abs(teamAvgs[3] - averages[3]),
-      Math.abs(teamAvgs[4] - averages[4]),
-      Math.abs(teamAvgs[5] - averages[5]),
-    ];
     let sumDiff = null;
     let nextPlayer;
+    let potentialTeamAvgs;
     noTeamPlayers.map((player) => {
-      let playerDiff =
-        Math.abs(player.offense - avgDiffs[0]) +
-        Math.abs(player.defense - avgDiffs[1]) +
-        Math.abs(player.skating - avgDiffs[2]) +
-        Math.abs(player.passing - avgDiffs[3]) +
-        Math.abs(player.shot - avgDiffs[4]) +
-        Math.abs(player.stick - avgDiffs[5]);
-      if (sumDiff == null || playerDiff < sumDiff) {
-        sumDiff = playerDiff;
+      potentialTeamAvgs = findAverages([...team, player]);
+      let teamAvgDiff =
+        Math.abs(potentialTeamAvgs[0] - averages[0]) +
+        Math.abs(potentialTeamAvgs[1] - averages[1]) +
+        Math.abs(potentialTeamAvgs[2] - averages[2]) +
+        Math.abs(potentialTeamAvgs[3] - averages[3]) +
+        Math.abs(potentialTeamAvgs[4] - averages[4]) +
+        Math.abs(potentialTeamAvgs[5] - averages[5]);
+      if (sumDiff == null || teamAvgDiff < sumDiff) {
+        sumDiff = teamAvgDiff;
         nextPlayer = player;
       }
     });
+    console.log("\n");
     return nextPlayer;
   }
 
   function autoFillNextPlayer() {
     if (Object.keys(noTeamPlayers).length > 0) {
       let nextPlayer;
+      const teamOneCurrAvgs = findAverages(teamOne);
+      const teamTwoCurrAvgs = findAverages(teamTwo);
       if (Object.keys(teamOne).length < Object.keys(teamTwo).length) {
-        nextPlayer = findNextPlayer(teamOne, overallAvgs);
+        nextPlayer = findNextPlayer(teamOne, teamTwoCurrAvgs);
         addToTeam("addToOne", nextPlayer);
       } else if (Object.keys(teamTwo).length < Object.keys(teamOne).length) {
-        nextPlayer = findNextPlayer(teamTwo, overallAvgs);
+        nextPlayer = findNextPlayer(teamTwo, teamOneCurrAvgs);
         addToTeam("addToTwo", nextPlayer);
-      } else if (
-        (Object.keys(teamOne).length + Object.keys(teamTwo).length) % 4 ===
-        0
-      ) {
-        nextPlayer = findNextPlayer(teamOne, overallAvgs);
-        addToTeam("addToOne", nextPlayer);
       } else {
-        nextPlayer = findNextPlayer(teamTwo, overallAvgs);
-        addToTeam("addToTwo", nextPlayer);
+        nextPlayer = findNextPlayer(teamOne, teamTwoCurrAvgs);
+        addToTeam("addToOne", nextPlayer);
       }
     }
   }
